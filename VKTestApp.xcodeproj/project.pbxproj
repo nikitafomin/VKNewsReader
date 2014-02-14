@@ -64,6 +64,9 @@
 		1158148D18AE1B60004D42F1 /* ic_vk_logo_nb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1158145E18AE1B60004D42F1 /* ic_vk_logo_nb@2x.png */; };
 		1158148E18AE1B60004D42F1 /* SDK resources-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1158145F18AE1B60004D42F1 /* SDK resources-Info.plist */; };
 		1158149718AE3730004D42F1 /* AuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1158149618AE3730004D42F1 /* AuthViewController.m */; };
+		1158149A18AE3FA6004D42F1 /* NewsTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1158149918AE3FA6004D42F1 /* NewsTableController.m */; };
+		1158149D18AE54C7004D42F1 /* NewsItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 1158149C18AE54C7004D42F1 /* NewsItem.m */; };
+		115814A018AE54FE004D42F1 /* NewsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1158149F18AE54FE004D42F1 /* NewsCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -197,6 +200,12 @@
 		1158146118AE1B60004D42F1 /* sdk.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = sdk.xcodeproj; sourceTree = "<group>"; };
 		1158149518AE3730004D42F1 /* AuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthViewController.h; sourceTree = "<group>"; };
 		1158149618AE3730004D42F1 /* AuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthViewController.m; sourceTree = "<group>"; };
+		1158149818AE3FA6004D42F1 /* NewsTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsTableController.h; sourceTree = "<group>"; };
+		1158149918AE3FA6004D42F1 /* NewsTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsTableController.m; sourceTree = "<group>"; };
+		1158149B18AE54C7004D42F1 /* NewsItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsItem.h; sourceTree = "<group>"; };
+		1158149C18AE54C7004D42F1 /* NewsItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsItem.m; sourceTree = "<group>"; };
+		1158149E18AE54FE004D42F1 /* NewsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsCell.h; sourceTree = "<group>"; };
+		1158149F18AE54FE004D42F1 /* NewsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -262,6 +271,12 @@
 				115813E318ADFC3A004D42F1 /* Main.storyboard */,
 				1158149518AE3730004D42F1 /* AuthViewController.h */,
 				1158149618AE3730004D42F1 /* AuthViewController.m */,
+				1158149818AE3FA6004D42F1 /* NewsTableController.h */,
+				1158149918AE3FA6004D42F1 /* NewsTableController.m */,
+				1158149E18AE54FE004D42F1 /* NewsCell.h */,
+				1158149F18AE54FE004D42F1 /* NewsCell.m */,
+				1158149B18AE54C7004D42F1 /* NewsItem.h */,
+				1158149C18AE54C7004D42F1 /* NewsItem.m */,
 				115813E918ADFC3A004D42F1 /* Images.xcassets */,
 				115813D818ADFC3A004D42F1 /* Supporting Files */,
 			);
@@ -561,6 +576,7 @@
 				1158147518AE1B60004D42F1 /* VKBundle.m in Sources */,
 				1158148518AE1B60004D42F1 /* VKUploadPhotoBase.m in Sources */,
 				1158146418AE1B60004D42F1 /* NSData+AES256.m in Sources */,
+				1158149D18AE54C7004D42F1 /* NewsItem.m in Sources */,
 				1158148318AE1B60004D42F1 /* VKResponse.m in Sources */,
 				1158149718AE3730004D42F1 /* AuthViewController.m in Sources */,
 				1158146D18AE1B60004D42F1 /* VKApiFriends.m in Sources */,
@@ -573,6 +589,7 @@
 				1158147A18AE1B60004D42F1 /* VKHTTPOperation.m in Sources */,
 				1158147C18AE1B60004D42F1 /* VKLikes.m in Sources */,
 				1158147818AE1B60004D42F1 /* VKError.m in Sources */,
+				1158149A18AE3FA6004D42F1 /* NewsTableController.m in Sources */,
 				1158146C18AE1B60004D42F1 /* VKApiCaptcha.m in Sources */,
 				1158148A18AE1B60004D42F1 /* VKUtil.m in Sources */,
 				1158148718AE1B60004D42F1 /* VKUploadWallPhotoRequest.m in Sources */,
@@ -584,6 +601,7 @@
 				1158146E18AE1B60004D42F1 /* VKApiObject.m in Sources */,
 				1158147618AE1B60004D42F1 /* VKCaptchaView.m in Sources */,
 				1158147D18AE1B60004D42F1 /* VKObject.m in Sources */,
+				115814A018AE54FE004D42F1 /* NewsCell.m in Sources */,
 				1158146518AE1B60004D42F1 /* NSData+MD5.m in Sources */,
 				1158148918AE1B60004D42F1 /* VKUsersArray.m in Sources */,
 				1158147B18AE1B60004D42F1 /* VKImageParameters.m in Sources */,
