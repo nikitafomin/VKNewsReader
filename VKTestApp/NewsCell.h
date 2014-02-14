@@ -11,6 +11,9 @@
 
 @interface NewsCell : UITableViewCell
 
+@property (strong, nonatomic) IBOutlet UILabel *newsTextLabel;
+@property (strong, nonatomic) IBOutlet UIImageView *firstImage;
+@property (strong, nonatomic) IBOutlet UIImageView *secondImage;
 - (void)configureWithItem:(NewsItem *)item;
 
 @end

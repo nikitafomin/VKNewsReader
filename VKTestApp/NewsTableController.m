@@ -32,17 +32,32 @@
 
     [[VKApi wall] getMethodGroup];
     
-    //VKRequest * getWall = [VKRequest requestWithMethod:@"wall.get" andParameters:@{VK_API_OWNER_ID : @"-1"} andHttpMethod:@"GET"];
     VKRequest * getWall = [VKRequest requestWithMethod:@"newsfeed.get" andParameters:@{VK_API_COUNT: @"15"} andHttpMethod:@"GET"];
     
     [getWall executeWithResultBlock:^(VKResponse * response) {
-        NSLog(@"\n\naaa   %@   aaa\n\n",[[[response.json objectForKey:@"items"] firstObject] objectForKey:@"text"]);
+        NSLog(@"\n\n%@\n\n",response.json);
+        NSLog(@"\n\naaa   %@   aaa\n\n",[[response.json objectForKey:@"items"] objectAtIndex:1]);
         
         NewsItem *item;
         _newsArray = [NSMutableArray arrayWithCapacity:[(NSArray *)[response.json objectForKey:@"items"] count]];
         for (NSDictionary *itemDict in [response.json objectForKey:@"items"]) {
             item = [[NewsItem alloc] init];
             item.text = [itemDict objectForKey:@"text"];
+            //find 2 photo
+            NSInteger photoCount = 0;
+            for (NSDictionary *attachment in [itemDict objectForKey:@"attachments"]) {
+                if ([[attachment objectForKey:@"type"] isEqualToString:@"photo"]) {
+                    if (photoCount == 0) {
+                        item.firstImageURL = [[attachment objectForKey:@"photo"] objectForKey:@"photo_130"];
+                    } else {
+                        item.secondImageURL = [[attachment objectForKey:@"photo"] objectForKey:@"photo_130"];
+                    }
+                    photoCount++;
+                }
+                if (photoCount == 2) {
+                    break;
+                }
+            }
             [_newsArray addObject:item];
         }
         

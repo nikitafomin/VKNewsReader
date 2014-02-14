@@ -21,7 +21,36 @@
 
 - (void)configureWithItem:(NewsItem *)item
 {
-    [self.textLabel setText:item.text];
+    [self.newsTextLabel setText:item.text];
+    
+    
+    [self.textLabel setBackgroundColor:[UIColor redColor]];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSURL *url = [NSURL URLWithString:item.firstImageURL];
+        NSData *data = [NSData dataWithContentsOfURL:url];
+        UIImage *img = [UIImage imageWithData:data];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.firstImage.image = img;
+            [self.firstImage setImage:img];
+            self.firstImage.layer.cornerRadius = 20;
+            self.firstImage.clipsToBounds = YES;
+        });
+    });
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSURL *url = [NSURL URLWithString:item.secondImageURL];
+        NSData *data = [NSData dataWithContentsOfURL:url];
+        UIImage *img = [UIImage imageWithData:data];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.secondImage.image = img;
+            [self.secondImage setImage:img];
+            self.secondImage.layer.cornerRadius = 20;
+            self.secondImage.clipsToBounds = YES;
+        });
+    });
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
