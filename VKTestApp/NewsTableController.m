@@ -10,12 +10,12 @@
 
 @interface NewsTableController ()
 
+@property (nonatomic, strong) NSMutableArray *newsArray;
+@property (nonatomic) BOOL isFetching;
+
 @end
 
 @implementation NewsTableController
-{
-    NSMutableArray *_newsArray;
-}
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -37,7 +37,7 @@
     [self setRefreshControl:refreshControll];
     
     // get feeds
-    [self fetchFeeds];
+    [self refresh];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -53,11 +53,30 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Actions
+#pragma mark - Fetch feeds
 
-- (void)fetchFeeds
+- (void)fetchFeedsNext:(BOOL)nexFeeds
 {
-    VKRequest * getWall = [VKRequest requestWithMethod:@"newsfeed.get" andParameters:@{VK_API_COUNT: @"15"/*, @"start_time": @"123123123"*/} andHttpMethod:@"GET"];
+    if (_isFetching) {
+        return;
+    } else {
+        _isFetching = YES;
+    }
+    
+    
+    NSDictionary *param;
+    if (nexFeeds) {
+        NewsItem *item = [_newsArray lastObject];
+        param = @{VK_API_COUNT: @"15", @"start_time": item.date};
+    } else {
+#warning Max feeds in requesr - 100! Need to take this into account!
+        NSString *feedsCount = [NSString stringWithFormat:@"%lu",([_newsArray count] == 0 ? 15 : [_newsArray count])];
+        param = @{VK_API_COUNT: feedsCount};
+    }
+    NSLog(@"\n\n%@\n\n",param);
+    
+    
+    VKRequest * getWall = [VKRequest requestWithMethod:@"newsfeed.get" andParameters:param andHttpMethod:@"GET"];
     
     [getWall executeWithResultBlock:^(VKResponse * response) {
         
@@ -73,10 +92,16 @@
         NSLog(@"\n\nfirst feed:\n%@\n\n",[[response.json objectForKey:@"items"] firstObject]);
         
         NewsItem *item;
-        _newsArray = [NSMutableArray arrayWithCapacity:[(NSArray *)[response.json objectForKey:@"items"] count]];
+        
+        if (!nexFeeds) {
+            _newsArray = [NSMutableArray arrayWithCapacity:[(NSArray *)[response.json objectForKey:@"items"] count]];
+        }
+        
+        // parse and create items
         for (NSDictionary *itemDict in [response.json objectForKey:@"items"]) {
             item = [[NewsItem alloc] init];
             item.text = [itemDict objectForKey:@"text"];
+            item.date = [itemDict objectForKey:@"date"];
             
             //find 2 photo
             NSInteger photoCount = 0;
@@ -100,21 +125,42 @@
             [self.refreshControl endRefreshing];
         }
         
-        [self.tableView reloadData];
+        if (nexFeeds) {
+            NSInteger coutnOfNewItems = [(NSArray *)[response.json objectForKey:@"items"] count];
+            NSMutableArray *indexPathes = [NSMutableArray arrayWithCapacity:coutnOfNewItems];
+            for (int i = ((int)[_newsArray count] - 1); i > ([_newsArray count] - 1 - coutnOfNewItems); i--) {
+                [indexPathes insertObject:[NSIndexPath indexPathForRow:i inSection:0] atIndex:0];
+            }
+            [self.tableView insertRowsAtIndexPaths:indexPathes withRowAnimation:UITableViewRowAnimationAutomatic];
+        } else {
+            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+        }
+        
+        _isFetching = NO;
         
     } errorBlock:^(NSError * error) {
-        if (error.code != VK_API_ERROR) {
-            [error.vkError.request repeat];
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Ошибка" message:@"Не удалось связаться с VK" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        
+        if (self.refreshControl.refreshing) {
+            [self.refreshControl endRefreshing];
         }
-        else {
-            NSLog(@"VK error: %@", error);
-        }
+        
+        _isFetching = NO;
     }];
 }
 
+#pragma mark - Actions
+
 - (void)refresh
 {
-    [self fetchFeeds];
+    [self fetchFeedsNext:NO];
+}
+
+- (void)fetchNextFeeds
+{
+    [self fetchFeedsNext:YES];
 }
 
 - (IBAction)logoutClick:(id)sender
@@ -132,6 +178,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    NSLog(@"\n\naaaa aaaaaasdasd    %lu\n\n",[_newsArray count]);
     return [_newsArray count];
 }
 
@@ -142,6 +189,10 @@
     
     NewsItem *item = [_newsArray objectAtIndex:indexPath.row];
     [cell configureWithItem:item];
+    
+    if (indexPath.row == ([_newsArray count] - 4)) {
+        [self fetchNextFeeds];
+    }
     
     return cell;
 }

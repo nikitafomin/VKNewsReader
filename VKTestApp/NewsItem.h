@@ -10,6 +10,7 @@
 
 @interface NewsItem : NSObject
 
+@property (nonatomic, copy) NSString *date;
 @property (nonatomic, copy) NSString *text;
 @property (nonatomic, copy) NSString *senderName;
 @property (nonatomic, copy) NSString *iconURL;
