@@ -29,20 +29,55 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    [[VKApi wall] getMethodGroup];
     
-    VKRequest * getWall = [VKRequest requestWithMethod:@"newsfeed.get" andParameters:@{VK_API_COUNT: @"15"} andHttpMethod:@"GET"];
+    // add pull-to-refresh
+    
+    UIRefreshControl *refreshControll = [[UIRefreshControl alloc] init];
+    [refreshControll addTarget:self action:@selector(refresh) forControlEvents:UIControlEventValueChanged];
+    [self setRefreshControl:refreshControll];
+    
+    // get feeds
+    [self fetchFeeds];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Actions
+
+- (void)fetchFeeds
+{
+    VKRequest * getWall = [VKRequest requestWithMethod:@"newsfeed.get" andParameters:@{VK_API_COUNT: @"15"/*, @"start_time": @"123123123"*/} andHttpMethod:@"GET"];
     
     [getWall executeWithResultBlock:^(VKResponse * response) {
-        NSLog(@"\n\n%@\n\n",response.json);
-        NSLog(@"\n\naaa   %@   aaa\n\n",[[response.json objectForKey:@"items"] objectAtIndex:1]);
+        
+        //        (
+        //         "new_from",
+        //         items,
+        //         groups,
+        //         profiles,
+        //         "new_offset"
+        //         )
+        
+        NSLog(@"\n\nresponse:\n%@\n\n",response.json);
+        NSLog(@"\n\nfirst feed:\n%@\n\n",[[response.json objectForKey:@"items"] firstObject]);
         
         NewsItem *item;
         _newsArray = [NSMutableArray arrayWithCapacity:[(NSArray *)[response.json objectForKey:@"items"] count]];
         for (NSDictionary *itemDict in [response.json objectForKey:@"items"]) {
             item = [[NewsItem alloc] init];
             item.text = [itemDict objectForKey:@"text"];
+            
             //find 2 photo
             NSInteger photoCount = 0;
             for (NSDictionary *attachment in [itemDict objectForKey:@"attachments"]) {
@@ -61,19 +96,11 @@
             [_newsArray addObject:item];
         }
         
+        if (self.refreshControl.refreshing) {
+            [self.refreshControl endRefreshing];
+        }
+        
         [self.tableView reloadData];
-        
-        // photo_130
-        
-//        (
-//         "new_from",
-//         items,
-//         groups,
-//         profiles,
-//         "new_offset"
-//         )
-        
-        
         
     } errorBlock:^(NSError * error) {
         if (error.code != VK_API_ERROR) {
@@ -85,20 +112,10 @@
     }];
 }
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)refresh
 {
-    [super viewWillAppear:animated];
-    
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [self fetchFeeds];
 }
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-#pragma mark - Actions
 
 - (IBAction)logoutClick:(id)sender
 {

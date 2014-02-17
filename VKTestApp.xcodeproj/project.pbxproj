@@ -824,6 +824,7 @@
 				1158140218ADFC3A004D42F1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1158140318ADFC3A004D42F1 /* Build configuration list for PBXNativeTarget "VKTestAppTests" */ = {
 			isa = XCConfigurationList;
@@ -832,6 +833,7 @@
 				1158140518ADFC3A004D42F1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
