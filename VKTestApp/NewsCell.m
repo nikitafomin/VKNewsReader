@@ -10,10 +10,18 @@
 
 @implementation NewsCell
 
-//+ (void)heightForItem:(NewsItem *)item
-//{
-//    fdgdfg
-//}
++ (CGFloat)heightForItem:(NewsItem *)item
+{
+    // MIN 8*2 (from top bottom offset)
+    
+    CGFloat summ = 8*2;
+    
+//    if (item.text) {
+//        CGSize *textSize = [item.text sizeWithAttributes:<#(NSDictionary *)#>];
+//    }
+    
+    return summ;
+}
 
 - (void)configureWithItem:(NewsItem *)item
 {
@@ -33,14 +41,14 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 
                 // change width
-                CGFloat newWidth = (img.size.width / img.size.height)*self.firstImage.frame.size.height;
-                [self.firstImage setFrame:CGRectMake(self.firstImage.frame.origin.x, self.firstImage.frame.origin.y, newWidth, self.firstImage.frame.size.height)];
+                CGFloat newWidth = (img.size.width / img.size.height)*self.firstImageView.frame.size.height;
+                [self.firstImageView setFrame:CGRectMake(self.firstImageView.frame.origin.x, self.firstImageView.frame.origin.y, newWidth, self.firstImageView.frame.size.height)];
                 
                 // set image
-                self.firstImage.image = img;
-                [self.firstImage setImage:img];
-                self.firstImage.layer.cornerRadius = 20;
-                self.firstImage.clipsToBounds = YES;
+                self.firstImageView.image = img;
+                [self.firstImageView setImage:img];
+                self.firstImageView.layer.cornerRadius = 20;
+                self.firstImageView.clipsToBounds = YES;
             });
         });
     }
@@ -51,11 +59,18 @@
             NSData *data = [NSData dataWithContentsOfURL:url];
             UIImage *img = [UIImage imageWithData:data];
             
+            if (!img) {return;}
+            
             dispatch_async(dispatch_get_main_queue(), ^{
-                self.secondImage.image = img;
-                [self.secondImage setImage:img];
-                self.secondImage.layer.cornerRadius = 20;
-                self.secondImage.clipsToBounds = YES;
+                // change width
+                CGFloat newWidth = (img.size.width / img.size.height)*self.secondImageView.frame.size.height;
+                [self.secondImageView setFrame:CGRectMake(self.secondImageView.frame.origin.x, self.secondImageView.frame.origin.y, newWidth, self.secondImageView.frame.size.height)];
+                
+                // set image
+                self.secondImageView.image = img;
+                [self.secondImageView setImage:img];
+                self.secondImageView.layer.cornerRadius = 20;
+                self.secondImageView.clipsToBounds = YES;
             });
         });
     }

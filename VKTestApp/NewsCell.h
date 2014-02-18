@@ -12,10 +12,10 @@
 @interface NewsCell : UITableViewCell
 
 @property (strong, nonatomic) IBOutlet UILabel *newsTextLabel;
-@property (strong, nonatomic) IBOutlet UIImageView *firstImage;
-@property (strong, nonatomic) IBOutlet UIImageView *secondImage;
+@property (strong, nonatomic) IBOutlet UIImageView *firstImageView;
+@property (strong, nonatomic) IBOutlet UIImageView *secondImageView;
 
-+ (void)heightForItem:(NewsItem *)item;
++ (CGFloat)heightForItem:(NewsItem *)item;
 - (void)configureWithItem:(NewsItem *)item;
 
 @end

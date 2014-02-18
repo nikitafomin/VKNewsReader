@@ -76,25 +76,24 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oBu-tV-xZj">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oBu-tV-xZj">
                                             <rect key="frame" x="20" y="76" width="65" height="65"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="65" id="bQW-RP-u6K"/>
-                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="65" id="bV2-Go-LjO"/>
+                                                <constraint firstAttribute="width" constant="65" id="bV2-Go-LjO"/>
                                             </constraints>
                                         </imageView>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3q7-bK-rT6">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3q7-bK-rT6">
                                             <rect key="frame" x="102" y="76" width="65" height="65"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="65" id="KOY-RV-i8d"/>
-                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="65" id="seq-bm-beI"/>
+                                                <constraint firstAttribute="width" constant="65" id="seq-bm-beI"/>
                                             </constraints>
                                         </imageView>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="3q7-bK-rT6" secondAttribute="trailing" constant="153" id="6P8-qH-qf2"/>
                                         <constraint firstItem="oBu-tV-xZj" firstAttribute="top" secondItem="ARu-Dh-hg3" secondAttribute="bottom" constant="20" id="B28-a5-eS0"/>
                                         <constraint firstAttribute="bottom" secondItem="oBu-tV-xZj" secondAttribute="bottom" constant="8" id="Eql-fJ-OQK"/>
                                         <constraint firstItem="oBu-tV-xZj" firstAttribute="leading" secondItem="4iH-nc-5R5" secondAttribute="leading" constant="20" id="FrI-ZQ-oZk"/>
@@ -107,9 +106,9 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="firstImage" destination="oBu-tV-xZj" id="o61-KA-6zD"/>
+                                    <outlet property="firstImageView" destination="oBu-tV-xZj" id="cN1-Qk-2fV"/>
                                     <outlet property="newsTextLabel" destination="ARu-Dh-hg3" id="Kta-w2-Evh"/>
-                                    <outlet property="secondImage" destination="3q7-bK-rT6" id="JKy-Zi-eSi"/>
+                                    <outlet property="secondImageView" destination="3q7-bK-rT6" id="emm-qp-WN6"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
