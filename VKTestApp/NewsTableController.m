@@ -67,10 +67,11 @@
     NSDictionary *param;
     if (nexFeeds) {
         NewsItem *item = [_newsArray lastObject];
+        NSLog(@"\n\naaaaaasdasdasdasdasd       %@\n\n",item.date);
         param = @{VK_API_COUNT: @"15", @"start_time": item.date};
     } else {
-#warning Max feeds in requesr - 100! Need to take this into account!
-        NSString *feedsCount = [NSString stringWithFormat:@"%lu",([_newsArray count] == 0 ? 15 : [_newsArray count])];
+        //NSString *feedsCount = [NSString stringWithFormat:@"%lu",([_newsArray count] == 0 ? 15 : [_newsArray count] > 100 ? 100 : [_newsArray count])];
+        NSString *feedsCount = [NSString stringWithFormat:@"%lu",MIN(MAX([_newsArray count], 15), 100)];
         param = @{VK_API_COUNT: feedsCount};
     }
     NSLog(@"\n\n%@\n\n",param);
@@ -178,7 +179,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSLog(@"\n\naaaa aaaaaasdasd    %lu\n\n",[_newsArray count]);
+    NSLog(@"\n\nrows count:   %lu\n\n",[_newsArray count]);
     return [_newsArray count];
 }
 

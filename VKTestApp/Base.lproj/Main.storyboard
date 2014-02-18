@@ -58,33 +58,53 @@
         <scene sceneID="4Jj-5t-l2Z">
             <objects>
                 <tableViewController id="eB2-bb-btr" customClass="NewsTableController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="120" sectionHeaderHeight="22" sectionFooterHeight="22" id="Tmj-YI-3zk">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="150" sectionHeaderHeight="22" sectionFooterHeight="22" id="Tmj-YI-3zk">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NewsCell" rowHeight="120" id="QWy-We-9Su" customClass="NewsCell">
-                                <rect key="frame" x="0.0" y="86" width="320" height="120"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NewsCell" rowHeight="150" id="QWy-We-9Su" customClass="NewsCell">
+                                <rect key="frame" x="0.0" y="86" width="320" height="150"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QWy-We-9Su" id="4iH-nc-5R5">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="119"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="149"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="320" translatesAutoresizingMaskIntoConstraints="NO" id="ARu-Dh-hg3">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="53"/>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="300" translatesAutoresizingMaskIntoConstraints="NO" id="ARu-Dh-hg3">
+                                            <rect key="frame" x="10" y="0.0" width="300" height="56"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oBu-tV-xZj">
-                                            <rect key="frame" x="20" y="54" width="65" height="65"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oBu-tV-xZj">
+                                            <rect key="frame" x="20" y="76" width="65" height="65"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="65" id="bQW-RP-u6K"/>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="65" id="bV2-Go-LjO"/>
+                                            </constraints>
                                         </imageView>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3q7-bK-rT6">
-                                            <rect key="frame" x="102" y="54" width="65" height="65"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3q7-bK-rT6">
+                                            <rect key="frame" x="102" y="76" width="65" height="65"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="65" id="KOY-RV-i8d"/>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="65" id="seq-bm-beI"/>
+                                            </constraints>
                                         </imageView>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="3q7-bK-rT6" secondAttribute="trailing" constant="153" id="6P8-qH-qf2"/>
+                                        <constraint firstItem="oBu-tV-xZj" firstAttribute="top" secondItem="ARu-Dh-hg3" secondAttribute="bottom" constant="20" id="B28-a5-eS0"/>
+                                        <constraint firstAttribute="bottom" secondItem="oBu-tV-xZj" secondAttribute="bottom" constant="8" id="Eql-fJ-OQK"/>
+                                        <constraint firstItem="oBu-tV-xZj" firstAttribute="leading" secondItem="4iH-nc-5R5" secondAttribute="leading" constant="20" id="FrI-ZQ-oZk"/>
+                                        <constraint firstAttribute="bottom" secondItem="3q7-bK-rT6" secondAttribute="bottom" constant="8" id="TQh-CC-2QM"/>
+                                        <constraint firstAttribute="trailing" secondItem="ARu-Dh-hg3" secondAttribute="trailing" constant="10" id="biY-yL-eI9"/>
+                                        <constraint firstItem="3q7-bK-rT6" firstAttribute="leading" secondItem="oBu-tV-xZj" secondAttribute="trailing" constant="17" id="dYI-pi-fB4"/>
+                                        <constraint firstItem="ARu-Dh-hg3" firstAttribute="leading" secondItem="4iH-nc-5R5" secondAttribute="leading" constant="10" id="i70-o7-D4L"/>
+                                        <constraint firstItem="ARu-Dh-hg3" firstAttribute="top" secondItem="4iH-nc-5R5" secondAttribute="top" id="kXT-DB-4gd"/>
+                                        <constraint firstItem="3q7-bK-rT6" firstAttribute="top" secondItem="ARu-Dh-hg3" secondAttribute="bottom" constant="20" id="wto-PT-Xl2"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="firstImage" destination="oBu-tV-xZj" id="o61-KA-6zD"/>
